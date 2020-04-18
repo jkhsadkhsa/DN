@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongruan.dao.IRoleDao" >
+
+    <!--根据用户uid查询拥有权限-->
+    <select id="findRoleByUid" parameterType="Integer" resultType="com.zhongruan.bean.Role">
+        select * from tb_role where rid in (select rid from tb_u_r
+                where uid = #{uid})
+    </select>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhongruan.dao.IFeeDao" >
+
+<!--查询所有资费-->
+<select id="findAllFee" resultMap="LS_Fee">
+        select * from tb_fee
+    </select>
+<resultMap id="LS_Fee" type="com.zhongruan.bean.Fee">
+    <id column="fid" property="fid"/>
+    <result column="fname" property="fname"/>
+    <result column="fhour" property="fhour"/>
+    <result column="fbfee" property="fbfee"/>
+    <result column="fdfee" property="fdfee"/>
+    <result column="fcdate" property="fcdate"/>
+    <result column="fkdate" property="fkdate"/>
+    <result column="fsate" property="fsate"/>
+</resultMap>
+
+<!--添加资费-->
+<insert id="addFee"  parameterType="com.zhongruan.bean.Fee">
+        insert into tb_fee values (#{fid},#{fname},#{fhour},#{fbfee},#{fdfee},
+                                    #{fcdate},#{fkdate},#{fstate})
+    </insert>
+
+    <!--删除资费-->
+    <delete id="delFee" parameterType="java.lang.Integer">
+        delete from tb_fee where fid = #{fid}
+    </delete>
+
+    <!--修改前查询资费-->
+    <select id="findFeeByFid" parameterType="java.lang.Integer" resultType="com.zhongruan.bean.Fee">
+        select * from tb_fee where fid =#{fid}
+    </select>
+
+    <!--修改资费-->
+    <update id="updFee" parameterType="com.zhongruan.bean.Fee">
+        update tb_fee set fname =#{fname},fhour =#{fhour},fbfee =#{fbfee},fdfee =#{fdfee},
+                                    fcdate =#{fcdate},fkdate =#{fkdate},fstate =#{fstate}
+                                    where fid = #{fid}
+    </update>
+</mapper>
